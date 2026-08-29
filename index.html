@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#e9e6cf" />
+    <meta name="description" content="张暖阳的产品经理交互作品集，以 Three.js 柜体探索简历、项目和实习经历。" />
+    <title>张暖阳 · Product Manager Portfolio</title>
+  </head>
+  <body>
+    <a class="skip-link" href="#main-content">跳至主要内容</a>
+    <main id="main-content" class="app" aria-label="Three.js 互动柜子展示">
+      <canvas id="scene" tabindex="0" aria-label="可旋转、打开并探索内部物件的 3D 柜子"></canvas>
+
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="返回初始视角">
+          <span class="brand-dot" aria-hidden="true"></span>
+          NUANYANG / PORTFOLIO
+        </a>
+        <div class="tech" aria-label="使用技术">
+          <span>WELCOME TO MY PORTFOLIO</span>
+        </div>
+      </header>
+
+      <section class="hero-copy" aria-live="polite">
+        <p class="eyebrow">PRODUCT MANAGER · INTERACTIVE PORTFOLIO</p>
+        <h1>BUILDING<br /><em>useful futures.</em></h1>
+        <p class="lede">你好，我是张暖阳，求职意向为产品经理。打开柜门，从真实简历、五个完整项目和实践档案中了解我的产品思考与执行方式。</p>
+      </section>
+
+      <aside class="status-card" aria-live="polite">
+        <span class="status-light"></span>
+        <div>
+          <small>柜门状态</small>
+          <strong id="door-status">等待开启</strong>
+        </div>
+      </aside>
+
+      <nav id="project-dock" class="project-dock" aria-label="中柜项目箱快捷选择" aria-hidden="true" hidden>
+        <span class="project-dock-label">PROJECT BOXES</span>
+        <div class="project-dock-buttons">
+          <button type="button" data-project-box="gugu-island" aria-pressed="false"><i aria-hidden="true" style="--accent:#d96643"></i>咕咕岛</button>
+          <button type="button" data-project-box="tooth-squad" aria-pressed="false"><i aria-hidden="true" style="--accent:#a88ce0"></i>牙芽奇兵局</button>
+          <button type="button" data-project-box="kunqu-motion" aria-pressed="false"><i aria-hidden="true" style="--accent:#e5a5b5"></i>昆曲韵动</button>
+          <button type="button" data-project-box="goodboy" aria-pressed="false"><i aria-hidden="true" style="--accent:#595b5c"></i>GOODBOY</button>
+          <button type="button" data-project-box="lingfu" aria-pressed="false"><i aria-hidden="true" style="--accent:#9fc8bd"></i>灵馥</button>
+        </div>
+      </nav>
+
+      <div class="actions">
+        <button id="door-toggle" class="primary-action" type="button" aria-pressed="false">
+          <span class="button-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M5 3h11a2 2 0 0 1 2 2v14H5V3Zm3 3v10m7-4h.01" /></svg>
+          </span>
+          <span class="button-copy"><small>探索项目</small><b>打开项目柜</b></span>
+          <span class="button-arrow" aria-hidden="true">↗</span>
+        </button>
+        <button id="reset-view" class="ghost-action" type="button" aria-label="重置视角">
+          <svg viewBox="0 0 24 24"><path d="M4 12a8 8 0 1 0 2.34-5.66L4 8.68M4 4v4.68h4.68" /></svg>
+        </button>
+      </div>
+
+      <nav class="career-shortcuts" aria-label="作品集快捷入口">
+        <span>QUICK ACCESS</span>
+        <button type="button" data-career-shortcut="resume">简历</button>
+        <button type="button" data-career-shortcut="projects">项目</button>
+        <button type="button" data-career-shortcut="internship">实习期间部分作品</button>
+        <button type="button" data-career-shortcut="contact">联系</button>
+      </nav>
+
+      <footer class="hintbar">
+        <span><kbd>拖动</kbd> 旋转视角</span>
+        <span><kbd>滚轮</kbd> 拉近 / 拉远</span>
+        <span><kbd>柜门</kbd> 单柜开启 · 自动收合</span>
+        <span><kbd>左柜</kbd> 点击物件探索档案</span>
+        <span><kbd>中柜</kbd> 悬浮贴纸 · 点击进入项目</span>
+      </footer>
+
+      <aside id="resume-panel" class="artifact-panel resume-panel" role="dialog" aria-modal="true" aria-labelledby="resume-title" aria-hidden="true" hidden>
+        <div class="panel-kicker"><span>01</span> PERSONAL ARCHIVE</div>
+        <button class="panel-close" type="button" data-close-panel aria-label="关闭简历面板">×</button>
+        <div class="resume-panel-heading">
+          <div>
+            <p class="panel-overline">PROFILE / RESUME</p>
+            <h2 id="resume-title">张暖阳 · 个人简历</h2>
+          </div>
+          <a class="resume-download" href="./assets/resume.png" download="张暖阳-简历.png">下载 PNG</a>
+        </div>
+        <figure class="resume-document-frame">
+          <img src="./assets/resume.png" width="2880" height="4074" alt="张暖阳个人简历，包含基本信息、教育背景、实习经历、获奖荣誉与技能证书" />
+        </figure>
+      </aside>
+
+      <aside id="contact-panel" class="artifact-panel contact-panel" role="dialog" aria-modal="true" aria-labelledby="contact-title" aria-hidden="true" hidden>
+        <button class="panel-close" type="button" data-close-panel aria-label="关闭联系方式面板">×</button>
+        <div class="signal-orbit" aria-hidden="true"><i></i><i></i><i></i></div>
+        <h2 id="contact-title">期待在合适的机会与您相遇</h2>
+        <p class="contact-intro">Looking forward to meeting you at the right opportunity.</p>
+        <address class="contact-details">
+          <a href="tel:15030950338"><span>电话</span><b>15030950338</b></a>
+          <a href="mailto:3100024057@qq.com"><span>邮箱</span><b>3100024057@qq.com</b></a>
+        </address>
+      </aside>
+
+      <aside id="camera-panel" class="artifact-panel camera-panel" role="dialog" aria-modal="true" aria-labelledby="camera-title" aria-hidden="true" hidden>
+        <div class="panel-kicker"><span>03</span> FILM LAB</div>
+        <button class="panel-close" type="button" data-close-panel aria-label="关闭胶片上传面板">×</button>
+        <div class="camera-aperture" aria-hidden="true"></div>
+        <p class="panel-overline">INSTANT MEMORY</p>
+        <h2 id="camera-title">冲印一段影像</h2>
+        <p class="contact-intro">选择一张图片，它会被裁切并渲染进相机下方的四格胶卷。原图仅在本机浏览器中处理。</p>
+        <label id="upload-trigger" class="upload-trigger" for="photo-upload">
+          <input id="photo-upload" class="upload-input" type="file" accept="image/png,image/jpeg,image/webp,image/avif" aria-label="选择要冲印到胶片中的图片" />
+          <span aria-hidden="true">＋</span>
+          <b>选择图片</b>
+          <small>JPG · PNG · WEBP · AVIF</small>
+        </label>
+        <p id="upload-status" class="upload-status" role="status" aria-live="polite">等待你的第一张胶片</p>
+      </aside>
+
+      <aside id="internship-panel" class="artifact-panel internship-panel" role="dialog" aria-modal="true" aria-labelledby="internship-title" aria-hidden="true" hidden>
+        <div class="panel-kicker"><span>05</span> PRACTICE ARCHIVE</div>
+        <button class="panel-close" type="button" data-close-panel aria-label="关闭实习经历面板">×</button>
+        <p class="panel-overline">SELECTED INTERNSHIP WORK</p>
+        <h2 id="internship-title">实习期间部分作品</h2>
+        <p class="internship-lede">每一封信收录一份实习期间完成的校园网页设计。继续点击“下一封”，邮箱会吐出新的设计稿。</p>
+        <article class="internship-letter">
+          <div class="internship-letter-meta">
+            <span id="internship-index">LETTER 01 / 06</span>
+            <span>南京苏迪科技 · UI DESIGN</span>
+          </div>
+          <figure class="internship-preview-frame">
+            <img id="internship-image" src="./assets/internship/health-governance.jpg" alt="上海健康医学院健康治理研究院校园网页设计" />
+          </figure>
+          <div class="internship-caption">
+            <div><small id="internship-code">CAMPUS WEB 01</small><h3 id="internship-work-title">健康治理研究院</h3></div>
+            <p id="internship-work-summary">围绕医疗研究机构的资讯发布与学术活动，重构清晰、可信且易于维护的校园官网首页。</p>
+          </div>
+        </article>
+        <div class="internship-controls" aria-label="切换实习设计稿">
+          <button id="internship-prev" type="button" aria-label="查看上一封设计稿">上一封</button>
+          <button id="internship-next" type="button">下一封设计稿 <span aria-hidden="true">→</span></button>
+        </div>
+      </aside>
+
+      <div id="panel-scrim" class="panel-scrim" aria-hidden="true"></div>
+
+      <section id="art-studio" class="art-studio" role="dialog" aria-modal="true" aria-labelledby="art-studio-title" aria-hidden="true" hidden>
+        <div class="studio-shell">
+          <header class="studio-header">
+            <div>
+              <p class="studio-kicker"><span>04</span> POCKET ART STUDIO</p>
+              <h2 id="art-studio-title">把灵感画下来</h2>
+              <p>在画布上自由作画，完成后可连接 GPT Image 2，将草图优化成保留构图与笔触的水粉作品。</p>
+            </div>
+            <button id="studio-close" class="studio-close" type="button" aria-label="关闭画板">
+              <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6 6 18" /></svg>
+            </button>
+          </header>
+
+          <div class="studio-workspace">
+            <aside class="studio-tools" aria-label="绘画工具">
+              <div class="tool-block">
+                <span class="tool-label">颜色</span>
+                <div id="paint-colors" class="paint-colors" role="group" aria-label="画笔颜色">
+                  <button class="paint-swatch is-selected" type="button" data-color="#315f72" style="--swatch:#315f72" aria-label="深蓝色" aria-pressed="true"></button>
+                  <button class="paint-swatch" type="button" data-color="#d6656f" style="--swatch:#d6656f" aria-label="珊瑚红" aria-pressed="false"></button>
+                  <button class="paint-swatch" type="button" data-color="#e6ad54" style="--swatch:#e6ad54" aria-label="赭黄色" aria-pressed="false"></button>
+                  <button class="paint-swatch" type="button" data-color="#75a98f" style="--swatch:#75a98f" aria-label="薄荷绿" aria-pressed="false"></button>
+                  <button class="paint-swatch" type="button" data-color="#7a5b86" style="--swatch:#7a5b86" aria-label="葡萄紫" aria-pressed="false"></button>
+                  <button class="paint-swatch" type="button" data-color="#2f302a" style="--swatch:#2f302a" aria-label="炭黑色" aria-pressed="false"></button>
+                </div>
+              </div>
+              <label class="tool-block brush-control" for="brush-size">
+                <span class="tool-label">笔触 <output id="brush-size-output">18</output></span>
+                <input id="brush-size" type="range" min="4" max="56" value="18" step="1" />
+              </label>
+              <div class="studio-tool-actions">
+                <button id="paint-undo" class="studio-tool-button" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 7 4 12l5 5M5 12h8a6 6 0 1 1 0 12" /></svg><span>撤销</span>
+                </button>
+                <button id="paint-clear" class="studio-tool-button" type="button">
+                  <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m4 7 16 0M9 7V4h6v3m-9 0 1 14h10l1-14" /></svg><span>清空</span>
+                </button>
+              </div>
+            </aside>
+
+            <div class="easel-stage">
+              <div class="easel-crown" aria-hidden="true"><i></i><b></b><i></i></div>
+              <div class="canvas-frame">
+                <canvas id="paint-canvas" width="1200" height="800" tabindex="0" aria-label="可用鼠标、触控笔或手指作画的画布"></canvas>
+                <div class="canvas-vine vine-top" aria-hidden="true"></div>
+                <div class="canvas-vine vine-bottom" aria-hidden="true"></div>
+              </div>
+              <div class="easel-legs" aria-hidden="true"><i></i><b></b><i></i></div>
+            </div>
+
+            <aside class="studio-finish">
+              <p class="finish-number">FINISH / 04</p>
+              <h3>水粉化你的作品</h3>
+              <p>先保留原始笔触，再添加柔和色阶、干刷颗粒与棉纸肌理。</p>
+              <button id="gouache-optimize" class="gouache-button" type="button">
+                <span class="gouache-spark" aria-hidden="true"></span>
+                <b>优化为水粉作品</b>
+                <small>GPT IMAGE 2 · SECURE API</small>
+              </button>
+              <button id="paint-restore" class="studio-link-button" type="button" disabled>恢复优化前</button>
+              <button id="paint-download" class="studio-link-button" type="button">下载作品 PNG</button>
+              <p id="paint-status" class="paint-status" role="status" aria-live="polite">画布已经准备好</p>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section id="project-viewer" class="project-viewer" role="dialog" aria-modal="true" aria-labelledby="project-viewer-title" aria-hidden="true" hidden>
+        <header class="project-viewer-bar">
+          <button id="project-back" class="project-back" type="button" aria-label="返回互动柜子">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7M8 12h11" /></svg>
+            <span>返回柜子</span>
+          </button>
+          <div class="project-viewer-identity">
+            <small id="project-viewer-index">PROJECT 01 / 05</small>
+            <strong id="project-viewer-title">咕咕岛</strong>
+          </div>
+          <nav class="project-switcher" aria-label="切换项目">
+            <button type="button" data-project-open="gugu-island">01</button>
+            <button type="button" data-project-open="tooth-squad">02</button>
+            <button type="button" data-project-open="kunqu-motion">03</button>
+            <button type="button" data-project-open="goodboy">04</button>
+            <button type="button" data-project-open="lingfu">05</button>
+          </nav>
+        </header>
+        <div id="project-scroll" class="project-scroll" tabindex="0">
+          <section class="project-page-intro">
+            <div class="project-page-heading">
+              <p id="project-page-kicker">CULTURAL GAME EXPERIENCE</p>
+              <h2 id="project-page-title">咕咕岛</h2>
+              <p id="project-page-summary">项目概述</p>
+            </div>
+            <aside class="project-brief" aria-label="项目概述与职责">
+              <div><span>ROLE / 我的角色</span><strong id="project-role">产品经理 · 交互设计</strong></div>
+              <div><span>TASK / 核心任务</span><p id="project-tasks">用户研究、功能规划、原型与视觉协同</p></div>
+              <div><span>TOOLS / 使用工具</span><ul id="project-tools"></ul></div>
+            </aside>
+          </section>
+          <div id="project-media" class="project-media" aria-live="polite"></div>
+          <footer class="project-end">
+            <span>END OF PROJECT</span>
+            <button id="project-next" type="button">查看下一个项目 <b>→</b></button>
+          </footer>
+        </div>
+        <div id="project-trail" class="project-trail" aria-hidden="true"></div>
+      </section>
+
+      <div class="loading" id="loading" role="status">
+        <div class="loading-grid" aria-hidden="true"></div>
+        <div class="loading-content">
+          <p class="loading-kicker"><span>ZHANG NUANYANG</span><i></i><span>2026</span></p>
+          <h2><span>PORT</span><em>folio</em></h2>
+          <p class="loading-caption">产品思考、体验设计与真实项目档案正在归位</p>
+          <div class="loading-progress-row"><span>ASSEMBLING ARCHIVE</span><strong id="loading-progress">0%</strong></div>
+          <div class="loading-track"><i></i></div>
+        </div>
+      </div>
+    </main>
+    <script type="module" src="/src/main.js"></script>
+  </body>
+</html>
